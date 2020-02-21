@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains intercept.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+/**
+ * Implements hook_help().
+ */
+function intercept_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the intercept module.
+    case 'help.page.intercept':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('intercept people') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function intercept_theme() {
+  return [
+    'intercept' => [
+      'render element' => 'children',
+    ],
+  ];
+}

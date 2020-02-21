@@ -1,0 +1,13 @@
+{
+    "name": "greet",
+    "type": "drupal-module",
+    "description": "greet people",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/greet",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/greet",
+        "source": "http://cgit.drupalcode.org/greet",
+    },
+}

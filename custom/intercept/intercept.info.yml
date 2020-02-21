@@ -1,0 +1,5 @@
+name: 'intercept'
+type: module
+description: 'intercept greets to people'
+core: 8.x
+package: 'Custom'

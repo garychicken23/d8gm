@@ -1,0 +1,17 @@
+services:
+  greet.logger.channel.greet:
+    parent: logger.channel_base
+    arguments: ['greet']
+  greet.from_current_user:
+    class: Drupal\greet\DefaultService
+    arguments: ['@current_user', '@config.factory', '@event_dispatcher']
+  # greet.logger.greet:
+  #   class: Drupal\greet\Logger\MailLogger
+  #   arguments: ['@logger.log_message_parser', '@config.factory']
+  #   tags:
+  #     - { name: logger }
+  # greet.redirect_subscriber:
+  #   class: \Drupal\greet\EventSubscriber\GreetRedirectSubscriber
+  #   arguments: ['@current_user', '@current_route_match']
+  #   tags:
+  #     - { name: event_subscriber }

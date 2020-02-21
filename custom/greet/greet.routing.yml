@@ -1,0 +1,16 @@
+greet.default_controller_sayhi:
+  path: '/greet/sayhi'
+  defaults:
+    _controller: '\Drupal\greet\Controller\DefaultController::sayhi'
+    _title: 'greet title'
+  requirements:
+    _permission: 'access content'
+  options: 
+    no_cache: true
+greet.hi_form:
+  path: '/admin/config/hi-config'
+  defaults:
+    _form: '\Drupal\greet\Form\HiConfigForm'
+    _title: 'configuration for your greetings'
+  requirements:
+    _permission: 'administer site configuration'

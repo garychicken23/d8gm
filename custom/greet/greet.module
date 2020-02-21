@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * @file
+ * Contains greet.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+/**
+ * Implements hook_help().
+ */
+function greet_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the greet module.
+    case 'help.page.greet':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('greet people') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function greet_theme() {
+  return [
+    'greet' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_install().
+ */
+function greet_install() {
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get("interface");
+  if(in_array('greet', array_keys($mail_plugins))) {
+    return;
+  }
+
+  $mail_plugins['greet'] = 'greet_mail';
+  $config->set('interface', $mail_plugins)->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function greet_uninstall() {
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get("interface");
+  if(!in_array('greet', array_keys($mail_plugins))) {
+    return;
+  }
+  unset($mail_plugins['greet']);
+  $config->set('interface', $mail_plugins)->save();
+}
+
+
+function greet_preprocess_node(&$var) {
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get("interface");
+
+  // kint($mail_plugins);
+}
+
+function greet_token_info() {
+  $type = [
+    'name' => t("Greet type token"),
+    'description' => t("Tokens related to Greet module, this is the type description"),
+  ];
+
+  $tokes['greet'] = [
+    'name' => t('greet say hi'),
+    'description' => t('greet token says hi'),
+  ];
+
+  return [
+    'types' => ['greet' => $type],
+    'tokens' => ['greet' => $tokes],
+  ];
+}
+
+
+function greet_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $replacement = [];
+  if($type == 'greet') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'greet':
+          $replacement[$original] = \Drupal::service('greet.from_current_user')->getUsername();
+          $config = \Drupal::config('greet.custom_greeting');
+          $bubbleable_metadata->addCacheableDependency($config);
+        break;
+      }
+    }
+  }
+}
