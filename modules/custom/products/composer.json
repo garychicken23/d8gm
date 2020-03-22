@@ -1,0 +1,13 @@
+{
+    "name": "products",
+    "type": "drupal-module",
+    "description": "product importer",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/products",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/products",
+        "source": "http://cgit.drupalcode.org/products",
+    },
+}

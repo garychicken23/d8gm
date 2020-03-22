@@ -1,0 +1,10 @@
+greet.config_task:
+  title: 'greet task title'
+  route_name: greet.default_controller_sayhi
+  base_route: greet.default_controller_sayhi
+greet.view:
+  title: 'view title'
+  description: 'view description'
+  route_name: greet.hi_form
+  base_route: greet.default_controller_sayhi
+  weight: 100

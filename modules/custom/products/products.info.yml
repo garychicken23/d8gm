@@ -1,0 +1,5 @@
+name: 'products'
+type: module
+description: 'product importer'
+core: 8.x
+package: 'Custom'

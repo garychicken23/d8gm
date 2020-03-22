@@ -1,0 +1,6 @@
+greet.greet_menu:
+  title: 'greet menu title'
+  description: 'menu description'
+  route_name: greet.hi_form
+  menu_name: main
+  weight: 0
